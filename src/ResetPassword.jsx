@@ -22,8 +22,7 @@ export default function ResetPassword() {
     if (access_token && refresh_token) {
       setToken(access_token);
       setRefreshToken(refresh_token); // necesitarás agregar este estado
-      console.log('Access:', access_token);
-      console.log('Refresh:', refresh_token);
+   
     }
   }, []);
 
