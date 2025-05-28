@@ -1,68 +1,93 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* Añade esto al principio de tu index.css para asegurar que el body y html ocupan todo el viewport */
+html, body, #root {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
+}
+
+/* Asegúrate de quitar o ajustar esto si lo tienes, porque puede afectar el centrado: */
+body {
+  /* NO uses display: flex aquí si tienes más de un hijo en body, mejor usa en el contenedor específico */
+  margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  /* place-items: center; <-- QUITA esto si lo tienes */
+  /* background-color, color, etc. pueden quedarse */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Estilos para centrar el formulario */
+.reset-password-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f2f1;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.reset-password-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.08), 0 1.5px 2px rgba(0,0,0,0.03);
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+
+.reset-password-card h2 {
+  margin-bottom: 1.5rem;
+  color: #8C092C;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.reset-password-input {
+  width: 100%;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #c8c8c8;
+  background: #fafbfc;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.reset-password-input:focus {
+  border-color: #8C092C;
+  outline: none;
+  background: #fff;
+}
+
+.reset-password-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: #8C092C;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background 0.2s;
+  margin-bottom: 0.6rem;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.reset-password-btn:hover {
+  background: #64061F;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.reset-password-status {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  min-height: 1.5em;
+  color: #e81123;
+}
+.reset-password-status:empty {
+  display: none;
+}
+.reset-password-status.success {
+  color: #107c10;
 }

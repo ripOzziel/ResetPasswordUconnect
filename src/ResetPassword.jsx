@@ -12,6 +12,7 @@ export default function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [status, setStatus] = useState('');
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -21,12 +22,14 @@ export default function ResetPassword() {
 
     if (access_token && refresh_token) {
       setToken(access_token);
-      setRefreshToken(refresh_token); // necesitarás agregar este estado
-   
+      setRefreshToken(refresh_token);
     }
   }, []);
 
   const handleReset = async () => {
+    setStatus('');
+    setSuccess(false);
+
     if (!token) return setStatus('Token no válido.');
     if (password.length < 6) return setStatus('La contraseña debe tener al menos 6 caracteres.');
     if (password !== confirm) return setStatus('Las contraseñas no coinciden.');
@@ -45,6 +48,7 @@ export default function ResetPassword() {
 
       if (error) throw error;
 
+      setSuccess(true);
       setStatus('✅ Contraseña actualizada con éxito.');
     } catch (err) {
       setStatus(`Error: ${err.message}`);
@@ -52,22 +56,35 @@ export default function ResetPassword() {
   };
 
   return (
-    <div>
-      <h2>Restablecer contraseña</h2>
-      <input
-        type="password"
-        placeholder="Nueva contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Confirmar contraseña"
-        value={confirm}
-        onChange={(e) => setConfirm(e.target.value)}
-      />
-      <button onClick={handleReset}>Cambiar contraseña</button>
-      <p>{status}</p>
+    <div className="reset-password-container">
+      <div className="reset-password-card">
+        <h2>Restablecer contraseña</h2>
+        <input
+          type="password"
+          className="reset-password-input"
+          placeholder="Nueva contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
+        />
+        <input
+          type="password"
+          className="reset-password-input"
+          placeholder="Confirmar contraseña"
+          value={confirm}
+          onChange={(e) => setConfirm(e.target.value)}
+          autoComplete="new-password"
+        />
+        <button className="reset-password-btn" onClick={handleReset}>
+          Cambiar contraseña
+        </button>
+        <div
+          className={`reset-password-status${success ? ' success' : ''}`}
+          role="alert"
+        >
+          {status}
+        </div>
+      </div>
     </div>
   );
 }
